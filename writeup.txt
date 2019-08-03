@@ -1,0 +1,74 @@
+
+
+Loose Notes - Experiments
+
+- Source activate rather than conda activate is required in VS code to get right env in terminal and interpreter.
+
+- installed XG boost via conda due to setup errors on pip (could be down to local env)
+
+- https://unix.stackexchange.com/questions/403972/the-python-command-starts-the-the-wrong-version-of-the-python-interpreter
+    - Py 2.7 seems hashed, as VS code calling wrong env.
+    - didn’t fix it, but cleared hash anyway.
+
+- Switched to VM to determine if that will resolve env issues.
+
+- in VM switching interpreter does indeed switch py version when doing through GUI and printing version to verify.
+
+- conda activate [name] worked in terminal.
+
+- install xgboost worked in VM
+
+- need to switch interpreter in GUI and in terminal to match up, or use one or the other as needed (best to be consistent)
+
+- in new conda env, make sure jupyter is installed OR it falls back on base version
+
+- installing onyx with pip caused issues - some other dependency didn’t come with it, or did not work (bug)
+
+- for XGB the ‘xgb.XGBClassifier’ is an SK learn interface, whereas the other is the original, sk being recommended.
+
+- ONNX Is a standard, but ONNX converting tools appear weak - bumping into errors and disparate approaches and maintenance teams.
+    - error indicates its not the mltools but onyx itself not containing a piece of code the tool needs.
+    - version mismatch?
+    - https://github.com/onnx/onnx
+        - this could suggests some sense of incorrect install order, I just pip installed I believe without looking at this ^^
+
+- When changing env and testing for working … do it in terminal, jupyter will need reset each time
+
+- noted that forgetting about mltool, onyx itself does not import - indicating a root error in the lib I am using.
+
+- noted terminal was not matching the env…
+    - NOTE!!!!! onnx imports in IDE but not terminal… term and ideally are different… WHHHHYYYYYY…
+        - Lets NOT use the terminal?
+        - NNOOOO its due to me doing some global installs
+
+- killed env, created fresh - seems onyx was installed globally somehow in any case.
+
+- using latest version of onyx - 1.5
+
+- onyx ml tools is at 1.3.1 rather than 1.5 … NOTE
+    - DID NOT help
+
+https://github.com/onnx/onnxmltools/issues/16
+- this seems to suggest install could be a windows issue of some kind, specific env variable.
+
+- tried again on mac
+    - that issue seems a VS code issue - does not occur in terminal
+    - ie in vs code terminal python 2.7 always executes instead of 3.x
+
+MAC solution: you install packages in default terminal, IDE PATH seems to have an issue with VS code.
+
+- THIS WILL ENABLE TESTING - so it was  VS code ‘issue’ or PATH sitting mess which VS code could not resolve for terminal, ie could not pip install in IDE
+
+FOR WINDOWS WILL NEED TO RESET THE VM SOMEHOW.
+
+- defines data types read in by the ml tools - https://github.com/microsoft/onnxconverter-common
+    - https://github.com/microsoft/onnxconverter-common/blob/master/onnxconverter_common/data_types.py
+
+- It works! on mac, need to understand how I can bundle vectorisation into the onnx model
+
+
+- Need to think about pros and cons of seperate vectoriser if we cant pipeline XGB with ONNX and vectorisation sk learn.
+    - IE can we use sk learn converter with XGB?
+    - or a combo of both? convert XGB and THEN use that in a pipeline... maybe.
+
+- Need to reset VM and windows attempt
