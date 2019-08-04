@@ -50,6 +50,7 @@ Loose Notes - Experiments
 
 https://github.com/onnx/onnxmltools/issues/16
 - this seems to suggest install could be a windows issue of some kind, specific env variable.
+- Seems to indicate only occuring from source install, which I may have installed globally.
 
 - tried again on mac
     - that issue seems a VS code issue - does not occur in terminal
@@ -72,3 +73,13 @@ FOR WINDOWS WILL NEED TO RESET THE VM SOMEHOW.
     - or a combo of both? convert XGB and THEN use that in a pipeline... maybe.
 
 - Need to reset VM and windows attempt
+
+- Now trying with pipeline and sk converter with XGB   
+    - not using text, just building a two layer pipeline.
+
+- XGboost does not work 'out of the box with sk learn onnx, need to register differently.
+
+- https://github.com/onnx/sklearn-onnx/blob/master/docs/pipeline.rst#id11
+- http://onnx.ai/sklearn-onnx/auto_examples/plot_pipeline_lightgbm.html#example-lightgbm
+
+

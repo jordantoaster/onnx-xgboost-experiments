@@ -21,9 +21,6 @@ df.loc[indicies,'label'] = 1
 x = df[['A', 'B', 'C', 'D']]
 y = df['label']
 
-#%%
-gbm = xgb.XGBClassifier(max_depth=3, n_estimators=300, learning_rate=0.05).fit(x.values, y)
-predictions = gbm.predict(x.values)
 
 #%% 
 # Save / convert

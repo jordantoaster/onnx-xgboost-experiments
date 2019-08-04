@@ -13,9 +13,17 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import CountVectorizer
 
+#%% Setup new converter
+
+from onnxmltools.convert.xgboost.operator_converters.XGBoost import convert_xgboost
+from onnxmltools.convert.xgboost.shape_calculators.Classifier import calculate_xgboost_classifier_output_shapes
+from skl2onnx import update_registered_converter
+
+update_registered_converter(xgb.XGBClassifier, 'XGBClassifier',
+                            calculate_xgboost_classifier_output_shapes,
+                            convert_xgboost)
 
 #%%
-
 df = pd.DataFrame(columns=['data', 'label'])
 
 df['data'] = pd.util.testing.rands_array(10, 100)
@@ -24,6 +32,7 @@ df['label'] = 0
 indicies = [1,2,20,11,99,77,45,23]
 df.loc[indicies,'label'] = 1
 
+
 #%%
 
 x = df['data']
@@ -31,7 +40,7 @@ y = df['label']
 
 pipeline = Pipeline([
     ('vect', CountVectorizer()),
-    ('clf', LogisticRegression()),
+    ('clf', xgb.XGBClassifier()),
 ])
 
 pipeline.fit(x, y)
@@ -41,7 +50,7 @@ model_onnx = convert_sklearn(pipeline, "pipe",
                              initial_types=[("input", StringTensorType([1, 1]))]
                             )
 
-with open("test-pipeline.onnx", "wb") as f:
+with open("test-pipeline-xg.onnx", "wb") as f:
     f.write(model_onnx.SerializeToString())
 
 #%%
