@@ -50,5 +50,3 @@ input_name = sess.get_inputs()[0].name
 label_name = sess.get_outputs()[0].name
 pred_onx = sess.run([label_name], {input_name: x.values})[0]
 pred_onx
-
-#%%
