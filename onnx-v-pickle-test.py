@@ -69,3 +69,6 @@ print(pred_pre)
 print(len(pred_pre))
 
 # Note to self - need to compare JM results v Radek results (new machine)
+# Note to self - flag file sizes
+
+#%%
